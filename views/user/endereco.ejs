@@ -1,0 +1,62 @@
+<div class="content">
+    <div class="container">
+        <div class="box">
+            <div class="row">
+                <div class="col-lg-12  col-md-12 col-sm-12 col-xs-12 ">
+                    <div class="box-body">
+                        <div class="row">
+                            
+                                <h3 class="mb10">Atualizar endereço</h3>
+                            
+                            <form action="/user/update" method="post">
+                                <div class="row c1" id="formEndereco">
+                                    <input type="hidden" name="userID" value="<%= user.id%>">
+                                    <div class="col-md-4 mb-3">
+                                        <label for="endereco" class="form-label">Endereço</label>
+                                        <input type="text" required="true" name="endereco" value="<%= endereco.endereco %>" class="form-control">
+                                    </div>
+                                    <div class="col-md-2 mb-3">
+                                        <label for="numero" class="form-label">N°</label>
+                                        <input type="text" required="true" name="numero" value="<%= endereco.numero %>" class="form-control">
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <label for="complemento" class="form-label">Complemento</label>
+                                        <input type="text" required="true" name="complemento" value="<%= endereco.complemento %>" class="form-control">
+                                    </div>
+                                    <div class="col-md-2 mb-3">
+                                        <label for="bairro" class="form-label">Bairro</label>
+                                        <input type="text" required="true" name="bairro" value="<%= endereco.bairro %>" class="form-control">
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <label for="cidade" class="form-label">Cidade</label>
+                                        <input type="text" required="true" name="cidade" value="<%= endereco.cidade %>" class="form-control">
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <label for="estado" class="form-label">Estado</label>
+                                        <select name="estado" id="" required="true" class="form-control">
+                                            <% UF.forEach(element => { %>
+                                                <% if (element.sigla == endereco.estado) { %>
+                                                    <option value="<%= element.sigla%>"selected><%= element.nome %></option>
+                                                <% } else {%>
+                                                    <option value="<%= element.sigla%>"><%= element.nome %></option>
+                                                <% } %>    
+                                            <% }) %>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="cep" class="form-label">CEP</label>
+                                        <input type="text" required="true" name="cep" value="<%= endereco.cep %>" class="form-control">
+                                    </div>
+                                    <div class="col-md-12 mb-3">
+                                        <button class="btn btn-primary btn-block mb10" type="submit">ATUALIZAR</button>
+                                    </div>          
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>    
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /.endereco-form -->

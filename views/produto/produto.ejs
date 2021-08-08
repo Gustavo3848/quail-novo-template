@@ -1,0 +1,211 @@
+<!-- product-single -->
+<div class="content">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="box">
+          <!-- product-description -->
+          <div class="box-body">
+            <div class="row">
+              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <div class="slider">
+                  <div class="owl-carousel owl-one owl-theme">
+                    <% img.forEach(imagem=> { %>
+                      <div class="item">
+                          <div class="slider-img">
+                              <img src="<%= imagem.img %>" alt="">
+                          </div>
+                      </div>                      
+                    <% }) %>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <div class="product-single">
+                  <h2>
+                    <%= data.nome %>
+                  </h2>
+                  <div class="product-rating">
+                    <span><i class="fa fa-star"></i></span>
+                    <span><i class="fa fa-star"></i></span>
+                    <span><i class="fa fa-star"></i></span>
+                    <span><i class="fa fa-star"></i></span>
+                    <span><i class="fa fa-star-o"></i></span>
+                    <span class="text-secondary">&nbsp;(4.8 Review Stars)</span>
+                  </div>
+                  <p class="product-price" style="font-size: 38px;"><b>
+                      <%= (data.valorVista).toLocaleString('pt-BR',{minimumFractionDigits: 2 , style: 'currency' ,
+                        currency: 'BRL' })%> <strike><b>
+                            <%=
+                              (data.valorVista+(data.valorVista*20/100)).toLocaleString('pt-BR',{minimumFractionDigits:
+                              2 , style: 'currency' , currency: 'BRL' })%></strike></p>
+                  <p class="text-green">Frete-grátis</p>
+                  <form action="/carrinho/insert/<%= data.id %>" method="POST">
+                  <div class="product-quantity">
+                    <h5>Quantidade</h5>
+                    <div class="quantity mb20">
+                      <input type="number" class="input-text qty text" step="1" min="1" max="6" name="qtd"
+                      value="1" title="Qty" size="4" pattern="[0-9]*">
+                    </div>
+                  </div>
+                  <button type="submit" class="btn btn-default">
+                    <i class="fa fa-shopping-cart"></i>&nbsp;CARRINHO
+                  </button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="box-head scroll-nav">
+          <div class="head-title"> <a class="page-scroll active" href="#product">Descrição</a>
+            <a class="page-scroll" href="#rating">Avaliações</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- highlights -->
+    <div class="row">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="box" id="product">
+          <div class="box-body">
+            <div class="highlights">
+              <%- data.descricao %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- rating reviews  -->
+    <div id="rating">
+      <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <div class="box">
+            <div class="box-head">
+              <h3 class="head-title">Rating &amp; Reviews</h3>
+            </div>
+            <div class="box-body">
+              <div class="row">
+                <div class="rating-review">
+                  <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                    <h1>4.8</h1>
+                    <div class="product-rating">
+                      <span><i class="fa fa-star"></i></span>
+                      <span><i class="fa fa-star"></i></span>
+                      <span><i class="fa fa-star"></i></span>
+                      <span><i class="fa fa-star"></i></span>
+                      <span><i class="fa fa-star-o"></i></span>
+                    </div>
+                    <p class="text-secondary">20 Ratings &amp; 10 Reviews</p>
+                  </div>
+                  <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                    <h2>80%</h2>
+                    <p class="text-secondary">Based on 20 Recommendations.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /.rating reviews  -->
+      <!-- customers review  -->
+      <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <div class="box">
+            <div class="box-head">
+              <h3 class="head-title">Avaliação de compradores</h3>
+            </div>
+            <div class="box-body">
+              <div class="row">
+                <% if (avaliacoes==false) { %>
+                  <div class="customer-reviews">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                      <p>Produto ainda não foi avaliado...</p>
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                      <div class="divider-line"></div>
+                    </div>
+                  </div>
+                  <% } else { %>
+                    <% avaliacoes.forEach(avaliacao=> { %>
+                      <div class="customer-reviews">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                          <p class="reviews-text">Por <span class="text-default">
+                              <%= avaliacao.userName %>
+                            </span></p>
+                          <div class="product-rating">
+                            <% for( let index=0; index < avaliacao.stars; index++ ) { %>
+                              <span><i class="fa fa-star"></i></span>
+                              <% } %>
+                          </div>
+                          <p>
+                            <%- avaliacao.descricao %>
+                          </p>
+                        </div>
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                          <div class="divider-line"></div>
+                        </div>
+                      </div>
+                      <% }) %>
+                        <% } %>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- customers review  -->
+    </div>
+  </div>
+  <!-- /.product-description -->
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="box-head">
+          <h3 class="head-title">Você também pode gostar</h3>
+        </div>
+      </div>
+    </div>
+    <div class="box">
+      <div class="box-body">
+        <div class="row">
+          <!-- product -->
+          <% produtosRecomendados.forEach(produto=> { %>
+            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 mb30">
+              <div class="product-block">
+                <div class="product-img"><img src="<%= produto.imgCapa %>" alt="<%= produto.slug %>"></div>
+                <div class="product-content">
+                  <h5><a href="/produto/<%= produto.slug %>" class="product-title">
+                      <%= produto.nome %> <strong>(<%= produto.fabricante %>)</strong>
+                    </a></h5>
+                  <div class="product-meta"><a href="/produto/<%= produto.slug %>" class="product-price">
+                      <%= (produto.valorVista).toLocaleString('pt-BR',{minimumFractionDigits: 2 , style: 'currency' ,
+                        currency: 'BRL' })%> <strike><b>
+                            <a href="/produto/<%= produto.slug %>" class="discounted-price">
+                              <%=
+                                (produto.valorVista+(produto.valorVista*20/100)).toLocaleString('pt-BR',{minimumFractionDigits:
+                                2 , style: 'currency' , currency: 'BRL' })%>
+                            </a>
+                            <span class="offer-price">20%off</span>
+                  </div>
+                  <div class="shopping-btn">
+                    <a href="/produto/<%= produto.slug %>" class="product-btn btn-cart"><i class="fa fa-shopping-cart"></i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <% }) %>
+              <!-- /.product -->
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- /.product-single -->
+</div>
