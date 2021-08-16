@@ -925,6 +925,14 @@ Class----------------
 .newsletter button { position: absolute; bottom: 19px; right: 13px; }
 .reviews-text { bottom: 76px; }
 .support-icon { float: initial; }
+#colSlideProduct{margin-bottom: 40px !important;}
+.quailstore{
+    margin: 0px;
+    text-align: start !important;
+}
+#colTitulo{
+    top: -6px !important;
+}
 }
 
 /* Extra Small Devices, Phones */
@@ -952,6 +960,7 @@ Class----------------
 .scroll-nav .head-title { padding: 22px 106px 22px 30px; }
 .scroll-nav a.active { border-bottom: 1px solid #fb730f; padding-bottom: 2px; color: #fb730f; }
 .scroll-nav a { padding-bottom: 2px; }
+#colSlideProduct{margin-bottom: 40px !important;}
 }
 
 /* Custom, iPhone Retina */
@@ -980,6 +989,7 @@ Class----------------
 .scroll-nav .head-title { padding: 22px 106px 22px 30px; }
 .scroll-nav a.active { border-bottom: 1px solid #fb730f; padding-bottom: 2px; color: #fb730f; }
 .scroll-nav a { padding-bottom: 2px; }
+#colSlideProduct{margin-bottom: 40px;}
 }
 
 /** media queries **/
@@ -1001,4 +1011,20 @@ ul.timeline > li > .timeline-panel:after { border-left-width: 0; border-right-wi
     display: inline-block;
     vertical-align: middle;
     float: none;
+}
+.prevIndex{
+    left: -28px !important;
+}
+.nextIndex{
+    right: -7px !important;
+}
+.quailstore{
+    margin: 0px;
+    text-align: center;
+}
+.prevMod{
+    left: -28px !important;
+}
+.nextMod{
+    right: -8px !important;
 }

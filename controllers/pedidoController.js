@@ -13,6 +13,11 @@ class pedidoController{
     }
     async meusPedidos(req,res){
         var pedidos = await pedidoModel.getPedidoByUserId(req.session.user.id);
+        pedidos.forEach(pedido => {
+            var produtos = pedido.produtosId.split(';')
+            pedido.produtosId = produtos
+            
+        });
         res.render('pedido/meusPedidos.ejs',{
             titlePage:'Meus pedidos' + " | Quail Store",
             pedidos:pedidos
