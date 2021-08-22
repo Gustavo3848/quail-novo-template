@@ -112,5 +112,13 @@ class produtoModel {
             return false
         }
     }
+    async getAllByBusca(busca){
+        var data = await sequelize.query("SELECT * FROM Produtos WHERE nome LIKE '%"+busca+"%';",{raw:true,nest:true})
+        if(data){
+            return data
+        }else{
+            return false
+        }
+    }
 }
 module.exports =  new produtoModel()

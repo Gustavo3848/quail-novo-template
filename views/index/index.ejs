@@ -1,13 +1,10 @@
-<!-- <div class="slider">
-    <div class="owl-carousel owl-one owl-theme">
-        <div class="item">
-            <div class="slider-img">
-                <img src="/static/images/banner_ssd.png" alt="">
-            </div>
-        </div>
-    </div>
-</div> -->
-<div class="container">
+
+<a href="/produto/categoria/ssd">  
+<div class="mt20">
+    <img src="./static/images/banner_ssd2.jpeg" alt="">
+</div>
+</a>
+<div class="">
     <div class="row mt20">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <div class="box">
@@ -28,7 +25,7 @@
                                 <div class="product-block">
                                     <div class="product-img"><img src="<%= produto.imgCapa %>" alt=""></div>
                                     <div class="product-content">
-                                        <h5><a href="/produto/<%= produto.slug %>" class="product-title"><%= produto.nome %> <strong>(<%= produto.fabricante %>)</strong></a></h5>
+                                        <h5><a href="/produto/<%= produto.slug %>" class="product-title quebrarTexto"><%= produto.nome %> <strong>(<%= produto.fabricante %>)</strong></a></h5>
                                         <div class="product-meta"><a href="/produto/<%= produto.slug %>" class="product-price"><%= (produto.valorVista).toLocaleString('pt-BR',{minimumFractionDigits: 2 , style: 'currency', currency: 'BRL'})%></a>
                                             <a href="/produto/<%= produto.slug %>" class="discounted-price"><%= (produto.valorVista+(produto.valorVista*20/100)).toLocaleString('pt-BR',{minimumFractionDigits: 2 , style: 'currency', currency: 'BRL'})%></a>
                                             <span class="offer-price">20%off</span>
@@ -47,7 +44,7 @@
         </div>
     </div>
 </div>
-<div class="container">
+<div class="">
     <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <div class="box">
@@ -67,7 +64,7 @@
                                 <div class="product-block">
                                     <div class="product-img"><img src="<%= produto.imgCapa %>" alt=""></div>
                                     <div class="product-content">
-                                        <h5><a href="/produto/<%= produto.slug %>" class="product-title"><%= produto.nome %> <strong>(<%= produto.fabricante %>)</strong></a></h5>
+                                        <h5><a href="/produto/<%= produto.slug %>" class="product-title quebrarTexto"><%= produto.nome %> <strong>(<%= produto.fabricante %>)</strong></a></h5>
                                         <div class="product-meta"><a href="/produto/<%= produto.slug %>" class="product-price"><%= (produto.valorVista).toLocaleString('pt-BR',{minimumFractionDigits: 2 , style: 'currency', currency: 'BRL'})%></a>
                                             <a href="/produto/<%= produto.slug %>" class="discounted-price"><%= (produto.valorVista+(produto.valorVista*20/100)).toLocaleString('pt-BR',{minimumFractionDigits: 2 , style: 'currency', currency: 'BRL'})%></a>
                                             <span class="offer-price">20%off</span>

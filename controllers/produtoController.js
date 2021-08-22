@@ -23,6 +23,14 @@ class produtoController{
             produtosRecomendados: produtosRecomendados
         })
     }
+    async buscar(req,res){
+        var filtro = req.body.buscar.toUpperCase()
+        var produtos = await produtoModel.getAllByBusca(filtro);
+        res.render('produto/produtos.ejs',{
+            titlePage:"Buscar: " + filtro + " | Quail Store",
+            produtos: produtos
+        })
+    }
     
 }
 

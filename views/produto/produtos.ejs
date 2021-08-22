@@ -1,6 +1,6 @@
 <!-- product-list -->
 <div class="content">
-  <div class="container">
+  <div class="">
       <div class="row">
           <!-- <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12">
 
@@ -209,12 +209,17 @@
               </div>
               <div class="row">
                   <!-- product -->
+                  <% if (produtos == false) { %>
+                    <div style="margin-bottom: 500px;">
+                        <h3>Nada encontrado...</h3>
+                    </div>
+                  <% } else { %>
                   <% produtos.forEach(produto => { %>
-                  <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 mb30">
+                  <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 mb30">
                       <div class="product-block">
                           <div class="product-img"><img src="<%= produto.imgCapa %>" alt=""></div>
                           <div class="product-content">
-                              <h5><a href="/produto/<%= produto.slug %>" class="product-title"><%= produto.nome %> <strong>(<%= produto.fabricante %>)</strong></a></h5>
+                              <h5 class="quebrarTexto"><a href="/produto/<%= produto.slug %>" class="product-title"><%= produto.nome %> <strong>(<%= produto.fabricante %>)</strong></a></h5>
                               <div class="product-meta"><a href="/produto/<%= produto.slug %>" class="product-price"><%= (produto.valorVista).toLocaleString('pt-BR',{minimumFractionDigits: 2 , style: 'currency', currency: 'BRL'})%></a>
                                   <a href="/produto/<%= produto.slug %>" class="discounted-price"><%= (produto.valorVista+(produto.valorVista*20/100)).toLocaleString('pt-BR',{minimumFractionDigits: 2 , style: 'currency', currency: 'BRL'})%></a>
                                   <span class="offer-price">20%off</span>
@@ -226,6 +231,7 @@
                       </div>
                   </div>
                   <% }) %>
+                  <% } %> 
                   <!-- /.product -->
               </div>
               <!-- <div class="row">
