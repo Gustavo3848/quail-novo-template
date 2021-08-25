@@ -1,4 +1,4 @@
-const { DataTypes} = require('sequelize');
+const { DataTypes } = require('sequelize');
 const db = require('../config/dbConfig');
 const sequelize = db()
 const Produto = sequelize.define('Produto', {
@@ -39,86 +39,89 @@ const Produto = sequelize.define('Produto', {
         type: DataTypes.STRING,
         allowNull: false
     }
-    
-  });
-  
-  console.log(Produto === sequelize.models.Produto); // true
-  
+
+});
+
+console.log(Produto === sequelize.models.Produto); // true
+
 Produto.sync();
 class produtoModel {
-    async insert(pedido){
-      
+    async insert(pedido) {
+
     }
-    async getBySlug(slug){
-        var data = await Produto.findOne({where:{'slug':slug}});
+    async getBySlug(slug) {
+        var data = await Produto.findOne({ where: { 'slug': slug } });
         return data.get()
     }
-    async getManyByIds(id){
-        var data = await Produto.findAll({where:{'id':id},
-            raw : true ,
+    async getManyByIds(id) {
+        var data = await Produto.findAll({
+            where: { 'id': id },
+            raw: true,
             nest: true
         });
         return data
     }
-    async getByid(id){
-        var data = await Produto.findOne({where:{'id':id}});
+    async getByid(id) {
+        var data = await Produto.findOne({ where: { 'id': id } });
         return data.get()
     }
-    async getByCategoria(categoria){
-        var data = await Produto.findAll({where:{'categoria':categoria},
-            raw : true ,
-            nest: true
-        });
-        if(data){
-            return data
-        }else{
-            return false
-        }
-    }
-    async getRecomendados(categoria){
-        var data = await Produto.findAll({where:{'categoria':categoria},limit:4,
-            raw : true ,
-            nest: true
-        });
-        if(data){
-            return data
-        }else{
-            return false
-        }
-    }
-    async getMaisVendidos(){
+    async getByCategoria(categoria) {
         var data = await Produto.findAll({
-            limit:6,
-            order:[['pedido','ASC']],
-            raw : true ,
+            where: { 'categoria': categoria },
+            raw: true,
             nest: true
         });
-        if(data){
+        if (data) {
             return data
-        }else{
+        } else {
             return false
         }
     }
-    async getLancamento(){
+    async getRecomendados(categoria) {
         var data = await Produto.findAll({
-            limit:6,
-            raw : true ,
+            where: { 'categoria': categoria }, limit: 4,
+            raw: true,
+            nest: true
+        });
+        if (data) {
+            return data
+        } else {
+            return false
+        }
+    }
+    async getMaisVendidos() {
+        var data = await Produto.findAll({
+            limit: 6,
+            order: [['pedido', 'ASC']],
+            raw: true,
+            nest: true
+        });
+        if (data) {
+            return data
+        } else {
+            return false
+        }
+    }
+    async getLancamento() {
+        var data = await Produto.findAll({
+            limit: 6,
+            raw: true,
             nest: true,
-            order:[['id','ASC']] 
+            order: [['id', 'ASC']]
         });
-        if(data){
+        if (data) {
             return data
-        }else{
+        } else {
             return false
         }
     }
-    async getAllByBusca(busca){
-        var data = await sequelize.query("SELECT * FROM Produtos WHERE nome LIKE '%"+busca+"%';",{raw:true,nest:true})
-        if(data){
+    async getAllByBusca(busca) {
+        var data = await sequelize.query("SELECT * FROM Produtos WHERE nome LIKE '%" + busca + "%';", { raw: true, nest: true })
+        if (data) {
             return data
-        }else{
+        } else {
             return false
         }
     }
 }
-module.exports =  new produtoModel()
+module.exports = new produtoModel()

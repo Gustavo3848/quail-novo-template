@@ -2,28 +2,28 @@ const enderecoModel = require('../models/enderecoModel');
 const mercadoPago = require('mercadopago');
 const uniqid = require('uniqid');
 const pedidoModel = require('../models/pedidoModel');
-class pedidoController{
-    async confirmarEndereco(req,res){
+class pedidoController {
+    async confirmarEndereco(req, res) {
         var endereco = await enderecoModel.getByUserId(req.session.user.id);
-        res.render('pedido/confirmarEndereco.ejs',{
-            titlePage:"Confirmar endereço" + " | Quail Store",
+        res.render('pedido/confirmarEndereco.ejs', {
+            titlePage: "Confirmar endereço" + " | Quail Store",
             endereco: endereco
         }
         );
     }
-    async meusPedidos(req,res){
+    async meusPedidos(req, res) {
         var pedidos = await pedidoModel.getPedidoByUserId(req.session.user.id);
         pedidos.forEach(pedido => {
             var produtos = pedido.produtosId.split(';')
             pedido.produtosId = produtos
-            
+
         });
-        res.render('pedido/meusPedidos.ejs',{
-            titlePage:'Meus pedidos' + " | Quail Store",
-            pedidos:pedidos
+        res.render('pedido/meusPedidos.ejs', {
+            titlePage: 'Meus pedidos' + " | Quail Store",
+            pedidos: pedidos
         })
     }
-    async pagar(req,res){
+    async pagar(req, res) {
         var emailPagador = req.session.user.email
         var id = uniqid()
         var total = 0
@@ -36,35 +36,38 @@ class pedidoController{
             userId: req.session.user.id,
             produtosId: description,
             codigo: id,
-            total:parseFloat(total)
+            total: parseFloat(total)
         }
         var dados = {
             items: [
                 {
-                  id:id,  
-                  title: description,
-                  unit_price: parseFloat(total),
-                  currency_id: 'BRL',
-                  quantity: 1,
+                    id: id,
+                    title: description,
+                    unit_price: parseFloat(total),
+                    quantity: 1,
                 }],
-            payer:{
-                email:emailPagador,
+            payer: {
+                email: emailPagador,
             },
-            external_reference:id,
-            back_urls:{
+            external_reference: id,
+            back_urls: {
                 success: "https://quailstore.com.br/pedido/meus-pedidos",
                 failure: "https://quailstore.com.br/pedido/meus-pedidos",
                 pending: "https://quailstore.com.br/pedido/meus-pedidos"
             },
-            auto_return:"approved"
+            auto_return: "approved"
         }
-        try { 
+        try {
             var pagamento = await mercadoPago.preferences.create(dados)
+            //console.log(pagamento)
             await pedidoModel.insert(pedido);
+            //res.locals.id = pagamento.body.id;
+            //res.render('pedido/teste.ejs',{
+            //titlePage:'Finalzar'})
             return res.redirect(pagamento.body.init_point);
         } catch (error) {
             res.send(error.message)
         }
     }
 }
-module.exports = new pedidoController();    
+module.exports = new pedidoController();

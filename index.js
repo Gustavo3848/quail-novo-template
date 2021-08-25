@@ -35,8 +35,10 @@ app.use(expressLayouts);
 //Mercado Pago
 mercadoPago.configure({
     sandbox:false,
-    access_token:'APP_USR-6333065914637372-082423-370aa18c381c0f9918085494a2b87c4c-235473733'
-});
+    access_token:'APP_USR-6333065914637372-082511-22f89470fa5fb3c3189f8a29d3de2bcb-235473733',
+})
+
+
 //Public Static
 app.use('/static', express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true }))
