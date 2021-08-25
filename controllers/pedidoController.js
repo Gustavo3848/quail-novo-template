@@ -44,6 +44,7 @@ class pedidoController{
                   id:id,  
                   title: description,
                   unit_price: parseFloat(total),
+                  currency_id: 'BRL',
                   quantity: 1,
                 }],
             payer:{
