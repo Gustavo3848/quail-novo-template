@@ -2,6 +2,7 @@ const enderecoModel = require('../models/enderecoModel');
 const mercadoPago = require('mercadopago');
 const uniqid = require('uniqid');
 const pedidoModel = require('../models/pedidoModel');
+const userModel = require('../models/userModel');
 class pedidoController {
     async confirmarEndereco(req, res) {
         var endereco = await enderecoModel.getByUserId(req.session.user.id);
@@ -38,17 +39,42 @@ class pedidoController {
             codigo: id,
             total: parseFloat(total)
         }
+        var endereco = await enderecoModel.getByUserId(req.session.user.id)
+        var usuario = await userModel.getUserById(req.session.user.id);
         var dados = {
             items: [
                 {
                     id: id,
                     title: description,
+                    description: description,
+                    category_id: 'Qualquer',
                     unit_price: parseFloat(total),
                     quantity: 1,
                 }],
             payer: {
+                first_name: usuario.nome,
+                last_name: usuario.sobrenome,
+                phone: {
+                    area_code: '043',
+                    number: 974002548
+                },
                 email: emailPagador,
+                address: {
+                    zip_code: endereco.cep,
+                    street_name: endereco.endereco,
+                    street_number: parseInt(endereco.numero)
+                }
             },
+            shipments: {
+                receiver_address: {
+                    zip_code: endereco.cep,
+                    state_name: endereco.estado,
+                    city_name: endereco.cidade,
+                    street_name: endereco.endereco,
+                    street_number: parseInt(endereco.numero)
+                }
+            },
+            registration_date: usuario.createdAt,
             external_reference: id,
             back_urls: {
                 success: "https://quailstore.com.br/pedido/meus-pedidos",

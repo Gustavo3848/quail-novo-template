@@ -1,6 +1,8 @@
 const userModel = require('../models/userModel');
 const enderecoModel = require('../models/enderecoModel');
+const validation = require('../config/validation')
 const bcrypt = require('bcryptjs');
+const validar = require('../config/validation');
 class userController {
     async formAttEndereco(req, res) {
         var endereco = await enderecoModel.getByUserId(req.session.user.id);
@@ -41,8 +43,14 @@ class userController {
     }
     async updateEndereco(req, res) {
         var endereco = req.body
-        await enderecoModel.getByUserIdAndUpdate(req.session.user.id, endereco);
-        res.redirect('/carrinho')
+        endereco.numero = parseInt(endereco.numero)
+        if(validar.numero(endereco.numero).Error){
+            req.session.ifErro = validar.numero(endereco.numero)
+            res.redirect('/user/endereco')
+        }else{
+            await enderecoModel.getByUserIdAndUpdate(req.session.user.id, endereco);
+            res.redirect('/carrinho')
+        }
     }
     async meusPedidos(req, res) {
         var x = await userModel.getAll()
@@ -107,36 +115,28 @@ class userController {
     }
     async criarConta(req, res) {
         let date = req.body
-        if (date.password != date.confirmarPassword) {
-            req.session.msg = { type: true, msg: "As senhas devem ser identicas!" }
-            res.redirect('/user/criar-conta')
-        } else {
-            var salt = bcrypt.genSaltSync(10)
-            var hash = bcrypt.hashSync(date.password, salt);
-            var user = {
-                nome: date.nome,
-                sobrenome: date.sobrenome,
-                email: date.email.toLowerCase(),
-                password: hash
-            }
-            var id = await userModel.insert(user);
-            if (id == "E-mail já usado!") {
-                req.session.msg = { type: true, msg: "E-mail já usado!" }
-                res.redirect('/user/criar-conta');
+        var obj = validation.validacaoTotal(date)
+        if(obj.Error){
+            req.session.ifErro = obj
+            res.redirect('/user/criar-conta');
+        }else{
+            if (date.password != date.confirmarPassword | ""+date.password.length < 6) {
+                req.session.msg = { type: true, msg: "Senha inválida (A senha deve conter no mínimo 6 caracteres e serem idênticas)" }
+                res.redirect('/user/criar-conta')
             } else {
-                var endereco = {
-                    endereco: date.endereco,
-                    numero: date.numero,
-                    complemento: date.complemento,
-                    bairro: date.bairro,
-                    cidade: date.cidade,
-                    estado: date.estado,
-                    cep: date.cep,
-                    userID: id
+                var salt = bcrypt.genSaltSync(10)
+                var hash = bcrypt.hashSync(date.password, salt);
+                obj.user.password = hash
+                var id = await userModel.insert(obj.user);
+                if (id == "E-mail já usado!") {
+                    req.session.msg = { type: true, msg: "E-mail já usado!" }
+                    res.redirect('/user/criar-conta');
+                } else {
+                    obj.endereco.userID = id
+                    await enderecoModel.insert(obj.endereco);
+                    req.session.user = { id: id, nome: obj.user.nome + " " + obj.user.sobrenome, email: obj.user.email }
+                    res.redirect('/carrinho')
                 }
-                await enderecoModel.insert(endereco);
-                req.session.user = { id: id, nome: user.nome + " " + user.sobrenome, email: user.email }
-                res.redirect('/carrinho')
             }
         }
     }

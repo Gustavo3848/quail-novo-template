@@ -17,6 +17,7 @@
     "express": "^4.17.1",
     "express-ejs-layouts": "^2.5.1",
     "express-session": "^1.17.2",
+    "jquery-mask-plugin": "^1.14.16",
     "mercadopago": "^1.5.8",
     "mongoose": "^5.13.8",
     "mysql2": "^2.3.0",

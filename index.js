@@ -18,8 +18,10 @@ app.use(session({
 app.use(function(req,res,next){
     res.locals.user = req.session.user || undefined
     res.locals.msg = req.session.msg || false
+    res.locals.ifErro = req.session.ifErro || false 
     res.locals.carrinho = req.session.carrinho || []
-    req.session.msg = undefined 
+    req.session.msg = undefined
+    req.session.ifErro = false
     next();
 })
 //Midle

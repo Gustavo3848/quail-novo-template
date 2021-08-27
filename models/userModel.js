@@ -43,6 +43,14 @@ class userModel {
   async getAll() {
     return User.findAll()
   }
+  async getUserById(id){
+    var data = await User.findOne({where:{'id':id}});
+    if(data){
+      return data
+    }else{
+      return false
+    }
+  }
   async auth(email, password) {
     var data = await (await User.findOne({ where: { 'email': email } }))
     if (data) {
