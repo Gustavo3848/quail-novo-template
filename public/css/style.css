@@ -3582,7 +3582,9 @@ Class----------------
     #navigation>ul>li>a {
         padding: 20px 31px;
     }
-
+    .item-dropdown-login {
+        top: 80px !important;
+    }
 }
 
 /* Small Devices, Tablets */
@@ -3651,6 +3653,9 @@ Class----------------
     #colTitulo {
         top: -6px !important;
     }
+    .item-dropdown-login {
+        top: 140px !important;
+    }
 }
 
 /* Extra Small Devices, Phones */
@@ -3668,9 +3673,11 @@ Class----------------
     }
 
     .account-section {
-        line-height: 0;
+        /*line-height: 0;*/
     }
-
+    .item-dropdown-login > div > a{
+        font-size: 14px !important;
+    }
     .navigation {
         top: 0px;
     }
@@ -3761,6 +3768,9 @@ Class----------------
     #colSlideProduct {
         margin-bottom: 40px !important;
     }
+    .item-dropdown-login{
+        top:35px !important;
+    }
 }
 
 /* Custom, iPhone Retina */
@@ -3778,7 +3788,7 @@ Class----------------
     }
 
     .account-section {
-        line-height: 0;
+        /*line-height: 0;*/
     }
 
     .navigation {
@@ -3967,4 +3977,34 @@ Class----------------
     display      : inline-block;
     white-space  : nowrap;
     max-width    : 100%;
+}
+
+.userLogin {
+    overflow     : hidden;
+    text-overflow: ellipsis;
+    display      : inline-block;
+    white-space  : nowrap;
+    max-width    : 90px;
+    background-color: white;
+    border: 0px;
+    color: rgb(132, 134, 135);
+}
+.userLogin:hover{
+    color: rgb(251, 115, 15);
+}
+
+.item-dropdown-login {
+    position        : fixed;
+    z-index         : 10005;
+    margin-top      : 0px;
+    padding         : 0px;
+    top             : 95px;
+    background-color: white;
+    left: unset;
+}
+.itemDrop{
+    display: list-item;
+}
+.dropdown-menu{
+    min-width: unset;
 }

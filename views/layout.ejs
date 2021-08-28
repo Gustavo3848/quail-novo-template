@@ -101,10 +101,29 @@
                         <% } else { %>
                             <div class="account-section">
                                 <ul>
-                                    <li><a href="/pedido/meus-pedidos" class="title "><i
-                                                class="glyphicon glyphicon-user"></i>
-                                            <%= user.nome %>
-                                        </a></li>
+                                    <li>
+                                        <!-- <div class="dropdown-login-menu">
+                                            <button class="title userLogin" onclick=""><i class="glyphicon glyphicon-user"></i>
+                                                <%= user.nome %> <i class="icon-chevron-down"></i></button>
+                                             <a class="title userLogin"><i
+                                                    class="glyphicon glyphicon-user"></i>
+                                                <%= user.nome %> <i class="icon-chevron-down"></i>
+                                            </a> 
+                                            <div class="item-dropdown-login">
+                                                <div><a href="/pedido/meus-pedidos"><i class="fa fa-sitemap" aria-hidden="true"></i> Pedidos</a></div>
+                                                <div><a href="/user/logout"><i class="fa fa-arrow-right" aria-hidden="true"></i> Sair</a></div>
+                                            </div>
+                                        </div> -->
+                                        <div class="dropdown">
+                                            <button class="title userLogin dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <i class="glyphicon glyphicon-user"></i> <%= user.nome %> <i class="icon-chevron-down"></i>
+                                            </button>
+                                            <div class="dropdown-menu item-dropdown-login" aria-labelledby="dropdownMenuButton">
+                                              <a class="dropdown-item itemDrop" href="/pedido/meus-pedidos"><i class="fa fa-sitemap" aria-hidden="true"></i> Pedidos</a>
+                                              <a class="dropdown-item itemDrop" href="/user/logout"><i class="fa fa-arrow-right" aria-hidden="true"></i> Sair</a>
+                                            </div>
+                                          </div>
+                                    </li>
                                     <li><a href="/carrinho" class="title"><i class="fa fa-shopping-cart"></i> <sup
                                                 class="cart-quantity">
                                                 <%= carrinho.length %>

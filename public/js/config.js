@@ -1,8 +1,8 @@
-(function($) {
-    $(document).ready(function() {
+(function ($) {
+    $(document).ready(function () {
         $('#cssmenu ul ul li:odd').addClass('odd');
         $('#cssmenu ul ul li:even').addClass('even');
-        $('#cssmenu > ul > li > a').click(function() {
+        $('#cssmenu > ul > li > a').click(function () {
             $('#cssmenu li').removeClass('active');
             $(this).closest('li').addClass('active');
             var checkElement = $(this).next();
@@ -26,16 +26,26 @@
                 provider: 'animate',
                 name: 'fade'
             }
-        
+
         });
-        
+
         $(function () {
             $("#rateYo").rateYo({
-            rating: 3.6,
-            starWidth: "16px"
+                rating: 3.6,
+                starWidth: "16px"
             });
         });
         $('#cep').mask('00000-000');
         $('.phone').mask('0000-0000');
+        $(".dropdown-login-menu").on(
+            function () {
+                $('.item-dropdown-login').finish().slideDown('fast');
+            },
+            function () {
+                $('.item-dropdown-login').finish().slideUp('fast');
+            }
+        );
+        
+
     });
 })(jQuery);
