@@ -38,7 +38,10 @@ class avaliacaoModel {
     var data = await Avaliacao.findAll({
       where: { 'produtoId': id }, raw: true,
       nest: true,
-    });
+      order: [
+        ['data', 'DESC'],
+      ]
+    })
     if (data) {
       return data
     } else {

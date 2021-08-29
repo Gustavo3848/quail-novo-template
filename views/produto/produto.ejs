@@ -137,9 +137,11 @@
                     <% avaliacoes.forEach(avaliacao=> { %>
                       <div class="customer-reviews">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                          <p style="text-align: end;margin-bottom: 5px;"><span><b><%= (avaliacao.data).toLocaleDateString( 'pt-br') %></b></span></p>
                           <p class="reviews-text">Por <span class="text-default">
                               <%= avaliacao.userName %>
-                            </span></p>
+                            </span>
+                          </p>
                           <div class="product-rating">
                             <% for( let index=0; index < avaliacao.stars; index++ ) { %>
                               <span><i class="fa fa-star"></i></span>
