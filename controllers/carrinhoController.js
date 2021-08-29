@@ -5,9 +5,10 @@ class carrinhoController {
             var totalPrazo = 0
             var totalVista = 0
             req.session.carrinho.forEach(produto => {
-                totalPrazo += produto.valorPrazo * produto.qtd
+                totalPrazo += produto.valorVista * produto.qtd
                 totalVista += produto.valorVista * produto.qtd
             });
+            totalPrazo = totalPrazo + ((17.88/100)*totalPrazo)
             res.render('carrinho/view.ejs', {
                 titlePage: 'Carrinho',
                 totalPrazo: totalPrazo,
